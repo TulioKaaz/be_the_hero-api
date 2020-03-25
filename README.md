@@ -51,9 +51,7 @@ Uma API Rest, que retorna o conteudo em JSON que vai ser consumida tanto por um 
       ```
 6. Rode as minhas configuração do insominia: [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=BeTheHero&uri=https%3A%2F%2Fraw.githubusercontent.com%2FTulioCaz%2Fbe_the_hero-api%2Fmaster%2Fexport_insomnia.json)
 
-7. Após finalizar as configurações, inicie a aplicação abrindo dois terminais:
-    - No 1° execute ```yarn dev```
-    - No 2° execute ```yarn queue```
+7. Após finalizar as configurações, inicie a aplicação com o comando ```yarn dev``` ou ````npm dev```.
 
 Agora é só testar as rotas e funcionalidades.
 
