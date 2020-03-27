@@ -29,6 +29,12 @@ export default {
     const { title, description, value } = req.body;
     const ong_id = req.headers.authorization;
 
+    const ongExists = await connection('ongs').where('id', ong_id).select('id');
+
+    if (!ongExists[0]) {
+      return res.status(400).json({ error: 'Ong not found' });
+    }
+
     const [id] = await connection('incidents').insert({
       title,
       description,

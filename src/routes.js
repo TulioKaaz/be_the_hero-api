@@ -5,17 +5,41 @@ import IncidentsController from './controller/IncidentController';
 import ProfileController from './controller/ProfileController';
 import SessionsController from './controller/SessionController';
 
+import sessionValidator from './validator/sessionValidator';
+import ongsValidator from './validator/ongsValidator';
+import profileValidator from './validator/profileValidator';
+import incidentsValidator from './validator/incidentsValidator';
+
 const routes = new Router();
 
-routes.post('/sessions', SessionsController.store);
+routes.post(
+  '/sessions',
+  sessionValidator.cereateSession,
+  SessionsController.store
+);
 
 routes.get('/ongs', OngsController.index);
-routes.post('/ongs', OngsController.store);
 
-routes.get('/incidents', IncidentsController.index);
-routes.post('/incidents', IncidentsController.store);
-routes.delete('/incidents/:id', IncidentsController.delete);
+routes.post('/ongs', ongsValidator.cereateOng, OngsController.store);
 
-routes.get('/profile', ProfileController.index);
+routes.get('/profile', profileValidator.listProfile, ProfileController.index);
+
+routes.get(
+  '/incidents',
+  incidentsValidator.listIncidents,
+  IncidentsController.index
+);
+
+routes.post(
+  '/incidents',
+  incidentsValidator.createIncident,
+  IncidentsController.store
+);
+
+routes.delete(
+  '/incidents/:id',
+  incidentsValidator.deleteIncident,
+  IncidentsController.delete
+);
 
 export default routes;
