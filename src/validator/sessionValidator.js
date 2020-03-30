@@ -3,7 +3,8 @@ import { celebrate, Segments, Joi } from 'celebrate';
 export default {
   cereateSession: celebrate({
     [Segments.BODY]: Joi.object().keys({
-      id: Joi.string().required().length(8),
+      email: Joi.string().email().required(),
+      password: Joi.string().min(4).required(),
     }),
   }),
 };

@@ -10,6 +10,8 @@ import ongsValidator from './validator/ongsValidator';
 import profileValidator from './validator/profileValidator';
 import incidentsValidator from './validator/incidentsValidator';
 
+import authMiddlewar from './middlewares/auth';
+
 const routes = new Router();
 
 routes.post(
@@ -22,13 +24,15 @@ routes.get('/ongs', OngsController.index);
 
 routes.post('/ongs', ongsValidator.cereateOng, OngsController.store);
 
-routes.get('/profile', profileValidator.listProfile, ProfileController.index);
-
 routes.get(
   '/incidents',
   incidentsValidator.listIncidents,
   IncidentsController.index
 );
+
+routes.use(authMiddlewar);
+
+routes.get('/profile', profileValidator.listProfile, ProfileController.index);
 
 routes.post(
   '/incidents',

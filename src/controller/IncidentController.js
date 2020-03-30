@@ -27,7 +27,8 @@ export default {
 
   async store(req, res) {
     const { title, description, value } = req.body;
-    const ong_id = req.headers.authorization;
+
+    const ong_id = req.ongId;
 
     const ongExists = await connection('ongs').where('id', ong_id).select('id');
 
@@ -48,7 +49,7 @@ export default {
   async delete(req, res) {
     const { id } = req.params;
 
-    const ong_id = req.headers.authorization;
+    const ong_id = req.ongId;
 
     const incident = await connection('incidents')
       .where('id', id)
