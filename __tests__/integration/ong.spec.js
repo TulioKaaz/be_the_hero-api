@@ -13,15 +13,22 @@ describe('ONG', () => {
   });
 
   it('should be able to create a new ONG', async () => {
-    const response = await request(app).post('/ongs').send({
-      name: 'wef',
-      email: 'oi@wef.com',
-      whatsapp: '5199714911',
-      city: 'Mostardas',
-      uf: 'RS',
-    });
+    const newOng = await request(app)
+      .post('/ongs')
+      .send({
+        name: 'wef',
+        password: '1234test',
+        confirmPassword: '1234test',
+        email: 'oi@wef.com',
+        whatsapp: '5199714911',
+        city: 'Mostardas',
+        uf: 'RS',
+      })
+      .expect('Content-Type', /json/)
+      .expect(200);
 
-    expect(response.body).toHaveProperty('id');
-    expect(response.body.id).toHaveLength(8);
+    expect(newOng.body).toMatchObject({
+      message: 'Successfully created ONG',
+    });
   });
 });
