@@ -7,7 +7,6 @@ import SessionsController from './controller/SessionController';
 
 import sessionValidator from './validator/sessionValidator';
 import ongsValidator from './validator/ongsValidator';
-import profileValidator from './validator/profileValidator';
 import incidentsValidator from './validator/incidentsValidator';
 
 import authMiddlewar from './middlewares/auth';
@@ -32,7 +31,7 @@ routes.get(
 
 routes.use(authMiddlewar);
 
-routes.get('/profile', profileValidator.listProfile, ProfileController.index);
+routes.get('/profile', ProfileController.index);
 
 routes.post(
   '/incidents',
