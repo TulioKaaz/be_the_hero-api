@@ -22,8 +22,10 @@ Este projeto foi desenvolvido com a ajuda das seguintes tecnologias.
 
 - [Node.js](https://nodejs.org)
 - [Express](https://expressjs.com)
-- [Knex](http://knexjs.org)
-- [Sqlite](https://www.sqlite.org)
+- [Yup](https://github.com/jquense/yup)
+- [Sequelize](https://sequelize.org/)
+- [Postgres](https://www.postgresql.org/)
+- [JWT](https://www.npmjs.com/package/jsonwebtoken)
 
 ## 💻 Projeto
 
@@ -34,10 +36,16 @@ Esta api faz parte do projeto Be The Hero, uma aplicação desenvolvida durante 
 Uma API Rest, que retorna o conteudo em JSON que vai ser consumida tanto por um Front-end em [ReactJS](https://reactjs.org/) quanto por uma aplicação Mobile Hibrido com [React Native](https://reactnative.dev/).
 
   - #### Banco de dados
-    O Banco de dados escolhido foi o **Sqlite** devido sua simplicidade e poder dos bancos SQL. Para ajudar no desenvolvimento foi usado o query builder **Knex**.
+    O Banco de dados escolhido foi o **Postgres** por ser open source e por ser muito poderoso. Para ajudar no desenvolvimento foi usado o query builder **Sequelize**.
 
   - #### Rotas
     Para desenvolver as rotas da aplicação foi usada a funcionalidade de Rotas do **Express**.
+
+  - #### Autenticação JWT
+    Foi implementado uma rota de autenticação JWT para trazer mais segurança para os usuarios
+
+  - #### Middlewares de Validações
+    Foi implementa do validações em todos os formularios usando a lib **Yup** retornando messagens de erro personalizadas para todas as validações.
 
 ## :ok_hand: Como Testar
 
