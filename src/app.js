@@ -2,13 +2,26 @@ import 'dotenv/config';
 
 import express from 'express';
 import cors from 'cors';
-
 import routes from './routes';
 
-const app = express();
+import './database';
 
-app.use(cors());
-app.use(express.json());
-app.use(routes);
+class App {
+  constructor() {
+    this.server = express();
 
-export default app;
+    this.middlewares();
+    this.routes();
+  }
+
+  middlewares() {
+    this.server.use(express.json());
+    this.server.use(cors());
+  }
+
+  routes() {
+    this.server.use(routes);
+  }
+}
+
+export default new App().server;

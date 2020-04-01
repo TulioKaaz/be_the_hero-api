@@ -1,15 +1,15 @@
 import { Router } from 'express';
 
-import OngsController from './controller/OngController';
-import IncidentsController from './controller/IncidentController';
-import ProfileController from './controller/ProfileController';
-import SessionsController from './controller/SessionController';
+import OngsController from './app/controller/OngController';
+import IncidentsController from './app/controller/IncidentController';
+import ProfileController from './app/controller/ProfileController';
+import SessionsController from './app/controller/SessionController';
 
-import sessionValidator from './validator/sessionValidator';
-import ongsValidator from './validator/ongsValidator';
-import incidentsValidator from './validator/incidentsValidator';
+import sessionValidator from './app/validator/sessionValidator';
+import ongsValidator from './app/validator/ongsValidator';
+import incidentsValidator from './app/validator/incidentsValidator';
 
-import authMiddlewar from './middlewares/auth';
+import authMiddlewar from './app/middlewares/auth';
 
 const routes = new Router();
 

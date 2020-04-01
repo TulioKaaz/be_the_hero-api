@@ -4,7 +4,11 @@ export default {
   cereateOng(req, res, next) {
     const schema = Yup.object().shape({
       name: Yup.string().required('O nome é um campo obrigatorio'),
-      email: Yup.string().required('O email é um campo obrigatorio'),
+      email: Yup.string()
+        .email(
+          'Este campo deve estar no formato de email, ex: heroi@bethehero.com'
+        )
+        .required('O email é um campo obrigatorio'),
       password: Yup.string()
         .min(4, 'A senha deve ter no minimo 4 caracteres')
         .required('A senha é um campo obrigatorio'),
