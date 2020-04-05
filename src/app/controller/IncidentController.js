@@ -36,7 +36,12 @@ class IncidentController {
     const ongExists = await Ong.findOne({ where: { id: ong_id } });
 
     if (!ongExists) {
-      return res.status(400).json({ error: 'Ong não encontrada' });
+      return res.status(400).json({
+        errors: {
+          error: 'Ong não encontrada',
+          key: 'token',
+        },
+      });
     }
 
     const { id } = await Incident.create({
@@ -61,7 +66,10 @@ class IncidentController {
 
     if (incident.ong_id !== ong_id) {
       return res.status(401).json({
-        error: 'Este caso não pertence a sua ONG, operação não permitida',
+        errors: {
+          error: 'Este caso não pertence a sua ONG, operação não permitida',
+          key: 'token',
+        },
       });
     }
 

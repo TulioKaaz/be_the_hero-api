@@ -1,21 +1,20 @@
 import * as Yup from 'yup';
 
+import errorGenerator from '../lib/errorGenerator';
+
 export default {
-  cereateSession(req, res, next) {
+  async cereateSession(req, res, next) {
     const schema = Yup.object().shape({
-      email: Yup.string().required('O email é um campo obrigatorio'),
-      password: Yup.string()
-        .min(4, 'A senha deve ter no minimo 4 caracteres')
-        .required('A senha é um campo obrigatorio'),
+      email: Yup.string().required('Email é obrigtório'),
+      password: Yup.string().required('Senha é obrigatória'),
     });
 
-    schema.validate(req.body, { abortEarly: false }).catch((err) =>
-      res.json({
-        error: [...err.errors],
-        field: err.inner.map((e) => e.path),
-      })
-    );
+    try {
+      await schema.validate(req.body, { abortEarly: false });
 
-    next();
+      return next();
+    } catch (err) {
+      return errorGenerator(res, err);
+    }
   },
 };

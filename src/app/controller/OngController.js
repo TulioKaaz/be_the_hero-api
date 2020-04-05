@@ -14,6 +14,20 @@ class OngController {
   async store(req, res) {
     const { email, password, name, whatsapp, city, uf } = req.body;
 
+    const ongExist = await Ong.findOne({
+      where: { email },
+      attributes: ['id'],
+    });
+
+    if (ongExist) {
+      return res.status(401).json({
+        errors: {
+          error: 'Este email ja esta em uso.',
+          key: 'email',
+        },
+      });
+    }
+
     await Ong.create({
       email,
       password,

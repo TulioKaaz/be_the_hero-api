@@ -1,40 +1,35 @@
 import * as Yup from 'yup';
 
+import errorGenerator from '../lib/errorGenerator';
+
 export default {
-  cereateOng(req, res, next) {
+  async cereateOng(req, res, next) {
     const schema = Yup.object().shape({
-      name: Yup.string().required('O nome é um campo obrigatorio'),
+      name: Yup.string().required('Nome é obrigatório'),
       email: Yup.string()
-        .email(
-          'Este campo deve estar no formato de email, ex: heroi@bethehero.com'
-        )
-        .required('O email é um campo obrigatorio'),
+        .email('Erro de formato: algo@algo.com')
+        .required('Email é obrigtório'),
       password: Yup.string()
-        .min(4, 'A senha deve ter no minimo 4 caracteres')
-        .required('A senha é um campo obrigatorio'),
+        .min(4, 'Senha muito curta: min 4')
+        .max(21, 'Senha muito longa: max 21')
+        .required('Senha é obrigatória'),
       confirmPassword: Yup.string()
-        .oneOf(
-          [Yup.ref('password')],
-          'A confirmação de senha não esta batendo.'
-        )
-        .required('É necessario confirmar a senha'),
+        .oneOf([Yup.ref('password')], 'Senhas não batem')
+        .required('Confirmação é obrigatória'),
       whatsapp: Yup.string()
-        .min(10, 'O numero whatsapp deve ter no minimo 10 caracteres')
-        .max(11, 'O numero whatsapp deve ter no máximo 11 caracteres')
-        .required('O whatsapp é um campo obrigatorio'),
-      city: Yup.string().required('A sua cidade é um campo obrigatorio'),
-      uf: Yup.string()
-        .required('O uf de seu estado é um campo obrigatorio')
-        .length(2, 'O uf é uma sigla de apenas 2 caracteres.'),
+        .min(10, 'Numero curto demais')
+        .max(11, 'Numero muito longo')
+        .required('Whatsapp é obrigatório'),
+      city: Yup.string().required('Cidade é obrigatório'),
+      uf: Yup.string().required('UF').length(2, 'UF'),
     });
 
-    schema.validate(req.body, { abortEarly: false }).catch((err) =>
-      res.json({
-        error: [...err.errors],
-        field: err.inner.map((e) => e.path),
-      })
-    );
+    try {
+      await schema.validate(req.body, { abortEarly: false });
 
-    next();
+      return next();
+    } catch (err) {
+      return res.json({ errors: errorGenerator(err) });
+    }
   },
 };

@@ -10,13 +10,21 @@ class SessionController {
     const ong = await Ong.findOne({ where: { email } });
 
     if (!ong) {
-      return res
-        .status(400)
-        .json({ error: 'A Ong com este email não foi encontrada' });
+      return res.status(400).json({
+        errors: {
+          error: 'A ong com este email, não foi encontrada',
+          key: 'email',
+        },
+      });
     }
 
     if (!(await ong.checkPassword(password))) {
-      return res.status(401).json({ error: 'A senha não bate' });
+      return res.status(401).json({
+        errors: {
+          error: 'A senha esta errada',
+          key: 'password',
+        },
+      });
     }
 
     const { id, name } = ong;
@@ -25,7 +33,6 @@ class SessionController {
       ong: {
         id,
         name,
-        email,
       },
       token: jwt.sign({ id }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,
