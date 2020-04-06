@@ -31,6 +31,10 @@ Este projeto foi desenvolvido com a ajuda das seguintes tecnologias.
 
 Esta api faz parte do projeto Be The Hero, uma aplicação desenvolvida durante a semana Omnistack 11.0 da [RocketSeat](https://rocketseat.com.br/). A aplicação visa ajudar Ongs a levantar fundos para custear diversos casos que elas se propõe a resolver.
 
+-[Web Aplication](https://github.com/TulioCaz/be-the-hero-webaplication) -- Parte web do Projeto
+
+-[Mobile Aplication](https://github.com/TulioCaz/be_the_hero_mobile) -- Parte mobile do Projeto
+
 ## 🔖 Layout
 
 Uma API Rest, que retorna o conteudo em JSON que vai ser consumida tanto por um Front-end em [ReactJS](https://reactjs.org/) quanto por uma aplicação Mobile Hibrido com [React Native](https://reactnative.dev/).
